@@ -15,7 +15,7 @@ def display_menu():
 def view_messages():
     """Fetch and display all messages from the server."""
     try:
-        response = requests.get(f"{SERVER_URL}/messages")
+        response = requests.get(f"{SERVER_URL}/messages", timeout=10)
         if response.status_code == 200:
             messages = response.json()
             print("\n--- All Messages ---")
@@ -31,7 +31,7 @@ def send_message():
     text = input("Enter your message: ")
     data = {'text': text}
     try:
-        response = requests.post(f"{SERVER_URL}/messages", json=data)
+        response = requests.post(f"{SERVER_URL}/messages", json=data, timeout=10)
         if response.status_code == 201:
             print("Message sent successfully.")
         else:
@@ -42,7 +42,7 @@ def send_message():
 def get_message_count():
     """Retrieve and display the total number of messages from the server."""
     try:
-        response = requests.get(f"{SERVER_URL}/messages/count")
+        response = requests.get(f"{SERVER_URL}/messages/count", timeout=10)
         if response.status_code == 200:
             count = response.json()['count']
             print(f"Total messages: {count}")

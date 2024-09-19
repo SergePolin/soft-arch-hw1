@@ -22,13 +22,13 @@ messages_lock = RLock()
 def load_messages():
     """Load messages from the persistent storage file."""
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, 'r') as file:
+        with open(DATA_FILE, 'r', encoding='utf-8') as file:
             messages.extend(json.load(file))
 
 def save_messages():
     """Save messages to the persistent storage file."""
     with messages_lock:
-        with open(DATA_FILE, 'w') as file:
+        with open(DATA_FILE, 'w', encoding='utf-8') as file:
             json.dump(messages, file)
 
 # Load messages on startup
